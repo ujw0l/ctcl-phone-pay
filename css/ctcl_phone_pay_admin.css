@@ -1,0 +1,13 @@
+.ctcl-phone-pay-orders{
+    margin-left: -9px!important;
+text-align: center!important;
+}
+.ctcl-pending-phone-order td{
+    text-align:center;
+}
+
+.pending-phone-payment-fieldset legend{
+    padding-top: 10px;
+    margin-bottom: 10px;
+
+}
