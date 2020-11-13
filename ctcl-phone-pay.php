@@ -62,6 +62,7 @@ if(class_exists('ctclBillings')){
       public function addRequiredAjax(){
 
         add_action('wp_ajax_getPhoneOrderDetail',array($this,'getPhoneOrderDetail'));
+        add_action('wp_ajax_phonePaymarkPaid',array($this,'markPaid'));
 
 
       }
@@ -72,11 +73,40 @@ if(class_exists('ctclBillings')){
       public function getPhoneOrderDetail(){
 
         $orderProcessing = new ctclProcessing();
-        $detail = $orderProcessing->getOrderDetail( absint($_POST['orderId']));
+        $detail = json_decode($orderProcessing->getOrderDetail( absint($_POST['orderId'])),TRUE);
         
-        echo '<pre>';
-        print_r($detail);
+echo '<fieldset class="ctcl-phone-pay-detail">';
+echo "<input type='hidden' id='ctcl-pay-phone-order-id' value='{$detail['order_id']}' />";
+echo "<legend class='dashicons-before dashicons-phone'>".__('Phone pay detail for','ctcl-phone-pay')." : {$detail['order_id']}</legend>";
+echo "<div class='ctcl-phone-pay-row'><span>".__("Customer Name ",'ctcl-phone-pay')." : </span><span>{$detail['ctcl-co-first-name']} {$detail['ctcl-co-last-name']}</span></div>";
+echo "<div class='ctcl-phone-pay-row'><span>".__("Phone Number ",'ctcl-phone-pay')." : </span><span>{$detail['checkout-phone-number']}</span></div>";
+echo "<div class='ctcl-phone-pay-row'><span>".__("Amount to be charged ",'ctcl-phone-pay')." : </span><span>{$detail['sub-total']}</span></div>";
+echo "<div class='ctcl-phone-pay-row'>";
+submit_button( __( 'Mark Paid', 'ctc-lite' ), 'primary ctcl-pay-phone-mark-paid','submit',false);
+echo "</div>";
+echo '</fieldset>';
 
+wp_die();
+      }
+
+      /**
+       * Mark phone pay paid
+       */
+      public function markPaid(){
+
+        global $wpdb;
+
+        $orderProcessing = new ctclProcessing();
+        $detail = json_decode($orderProcessing->getOrderDetail( absint($_POST['orderId'])),TRUE);
+        $detail['phone_payment_status'] = 'complete';
+        $update = $wpdb->update($wpdb->prefix.'ctclOrders',array('orderDetail'=>json_encode($detail)),array('orderId'=>absint($_POST['orderId'])));
+        if(1==$update):
+            echo "success";
+        else:
+            echo "failed";
+        endif;  
+
+        wp_die();
       }
 
      /**
@@ -145,7 +175,7 @@ if(class_exists('ctclBillings')){
         </fieldset>
         <?php
     else:
-        echo "<div>".__('No any peding phone payment','ctcl-phone-pay')."</div>";
+        echo "<div>".__('There are no any pending phone payment right now.','ctcl-phone-pay')."</div>";
     endif;
 else:
     echo "<div>".__('No any peding phone payment','ctcl-phone-pay')."</div>";
@@ -182,6 +212,7 @@ public function displayOptionsUser(){
 public function requiredWpAction(){
     add_action( 'admin_enqueue_scripts', array($this,'enequeAdminJs' ));
     add_action( 'admin_enqueue_scripts', array($this,'enequeAdmincss' ));
+    add_action( 'wp_enqueue_scripts', array($this,'enequeFrontendJs' ));
     add_action( 'wp_enqueue_scripts', array($this,'enequeFrontendCss' ));
 }
 /**
@@ -189,8 +220,14 @@ public function requiredWpAction(){
    */
 
   public function enequeAdminJs(){
-         wp_enqueue_script('ctclPhonePayJs', "{$this->phonePayFilePath}js/{$this->paymentId}_admin.js",array('ctclAdminJs'));
+         wp_enqueue_script('ctclAdminPhonePayJs', "{$this->phonePayFilePath}js/{$this->paymentId}_admin.js",array('ctclAdminJs'));
+         wp_localize_script('ctclAdminPhonePayJs','ctclPhonePayParams',array(
+             'markSucess'=>__("Marked paid sucessfully.",'ctcl-phone-pay'),
+             'markFail'=>__("Could not be mark paid at this time",'ctcl-phone-pay'),
+            ));
 }
+
+
 
 /**
    * Eneque admin JS files
@@ -198,6 +235,16 @@ public function requiredWpAction(){
 
   public function enequeAdmincss(){
         wp_enqueue_style('ctclPhonePayCss', "{$this->phonePayFilePath}css/{$this->paymentId}_admin.css",array());   
+}
+
+   /**
+   * Eneque frontend JS files
+   */
+
+  public function enequeFrontendJs(){
+    if('1'== get_option('ctcl_activate_phone_pay')):
+    wp_enqueue_script('ctclFrontEndPhonePayJs', "{$this->phonePayFilePath}js/{$this->paymentId}.js",array());
+    endif;
 }
 
    /**

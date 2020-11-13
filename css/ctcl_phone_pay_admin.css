@@ -11,3 +11,9 @@ text-align: center!important;
     margin-bottom: 10px;
 
 }
+
+.ctcl-phone-pay-detail{
+    border:1px dashed rgba(0,0,0,1);
+    padding:10px;
+    margin:10px;
+}
