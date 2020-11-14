@@ -17,3 +17,18 @@ text-align: center!important;
     padding:10px;
     margin:10px;
 }
+
+.ctcl-phone-pay-row{
+    display:block;
+    height:30px;
+}
+
+.ctcl-phone-pay-row span{
+
+    width:140px;
+    max-width:49%;
+}
+
+.ctcl-phone-pay-row input{
+    float:right;
+}

@@ -270,8 +270,8 @@ public function requiredWpAction(){
             $html .=  '<div class="ctcl-business-setting-row"><label for"ctcl-activate-phone-pay"  class="ctcl-activate-phone-pay">'.__('Activate Phone Pay :','ctcl-phone-pay').'</label>';
             $html .= "<span><input id='ctcl-activate-phone-pay' {$activate} type='checkbox' name='ctcl_activate_phone_pay' value='1'></span></div>";
 
-            $html .=  '<div class="ctcl-business-setting-row"><label for"ctcl-phone-pay-phone-number"  class="ctcl-phone-pay-phone-number-label">'.__('Business Phone Number:','ctcl-phone-pay').'</label>';
-            $html .= "<span><input id='ctcl-phone-pay-phone-number' type='text' required name='ctcl_phone_pay_phone_number' value='".get_option('ctcl_phone_pay_phone_number')."'></span></div>";
+            $html .=  '<div class="ctcl-business-setting-row"><label for"ctcl-phone-pay-phone-number"  class="ctcl-phone-pay-phone-number-label">'.__('Phone Number:','ctcl-phone-pay').'</label>';
+            $html .= "<span><input id='ctcl-phone-pay-phone-number' type='text' required name='ctcl_phone_pay_phone_number' value='".get_option('ctcl_phone_pay_phone_number')."'><i>".__("Number you will call from to collect billing info.",'ctcl-phone-pay')."</i></span></div>";
             $html .= '</div>';
             array_push($val,array(
                                     'settingFields'=>$this->settingFields,
@@ -303,7 +303,7 @@ public function requiredWpAction(){
       * html for frontend
       */
       public function frontendHtml(){
-      return '<div id=" ctcl-phone-pay-number">'.__('Provide payment info to call from :','ctcl-phone-pay').' '.get_option('ctcl_phone_pay_phone_number') . '</div>';
+      return '<div id=" ctcl-phone-pay-number">'.__('Please provide payment info to call from :','ctcl-phone-pay').' '.get_option('ctcl_phone_pay_phone_number') . '</div>';
       }
 
     }

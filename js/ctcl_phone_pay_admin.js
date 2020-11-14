@@ -23,7 +23,7 @@ class phonePayJs {
                     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;');
                     xhttp.addEventListener('load', event => {
                         if (event.target.status >= 200 && event.target.status < 400) {
-                            new jsOverlay({ elContent: event.target.response, containerHt: 570, containerWd: 1080, overlayNum: 1 });
+                            new jsOverlay({ elContent: event.target.response, containerHt: 183, containerWd: 300, overlayNum: 1 });
                             this.markPhonePayPaid();
                         } else {
                             console.log(event.target.statusText);
