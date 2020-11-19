@@ -82,9 +82,12 @@ echo "<legend class='dashicons-before dashicons-phone'>".__('Phone pay detail fo
 echo "<div class='ctcl-phone-pay-row'><span>".__("Customer Name ",'ctcl-phone-pay')." : </span><span>{$detail['ctcl-co-first-name']} {$detail['ctcl-co-last-name']}</span></div>";
 echo "<div class='ctcl-phone-pay-row'><span>".__("Phone Number ",'ctcl-phone-pay')." : </span><span>{$detail['checkout-phone-number']}</span></div>";
 echo "<div class='ctcl-phone-pay-row'><span>".__("Amount to be charged ",'ctcl-phone-pay')." : </span><span>{$detail['sub-total']}</span></div>";
-echo "<div class='ctcl-phone-pay-row'>";
+echo "<div class='ctcl-phone-pay-row ctcl-phone-pay-button-row'>";
+echo '<span>';
+submit_button( __( 'Open Order Detail', 'ctcl-phone-pay' ), 'primary ctcl-pay-phone-open-detail','submit',false);
+echo '</span><span>';
 submit_button( __( 'Mark Paid', 'ctcl-phone-pay' ), 'primary ctcl-pay-phone-mark-paid','submit',false);
-echo "</div>";
+echo "</span></div>";
 echo '</fieldset>';
 
 wp_die();
@@ -226,7 +229,7 @@ wp_die();
         echo "<div>".__('There are no any pending phone payment right now.','ctcl-phone-pay')."</div>";
     endif;
 else:
-    echo "<div>".__('No any peding phone payment','ctcl-phone-pay')."</div>";
+    echo "<div>".__('There are no any pending phone payment right now','ctcl-phone-pay')."</div>";
 endif;
       }
 
@@ -268,7 +271,7 @@ public function requiredWpAction(){
    */
 
   public function enequeAdminJs(){
-         wp_enqueue_script('ctclAdminPhonePayJs', "{$this->phonePayFilePath}js/{$this->paymentId}_admin.js",array('ctclAdminJs'));
+         wp_enqueue_script('ctclAdminPhonePayJs', "{$this->phonePayFilePath}js/{$this->paymentId}_admin.js",array('ctclAdminJs','ctclJsMasonry','ctclJsOverlay'));
          wp_localize_script('ctclAdminPhonePayJs','ctclPhonePayParams',array(
              'markSucess'=>__("Marked paid sucessfully.",'ctcl-phone-pay'),
              'markFail'=>__("Could not be mark paid at this time",'ctcl-phone-pay'),

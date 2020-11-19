@@ -32,3 +32,14 @@ text-align: center!important;
 .ctcl-phone-pay-row input{
     float:right;
 }
+
+.ctcl-phone-pay-button-row span:first-child{
+
+    float:left;
+
+}
+.ctcl-phone-pay-button-row span:last-child{
+
+    float:right;
+
+}
