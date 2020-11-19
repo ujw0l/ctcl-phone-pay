@@ -52,6 +52,7 @@ if(class_exists('ctclBillings')){
      public function callRequiredFilters(){
         add_filter('ctcl_process_payment_'.$this->paymentId ,array($this,'processPayment'));
         add_filter('ctcl_additional_tab',array($this,'addAdminTab'),20);
+        add_filter('ctcl_custom_email_body',array($this,'generateEmailBody'),10,2);
 
      }
 
@@ -82,13 +83,61 @@ echo "<div class='ctcl-phone-pay-row'><span>".__("Customer Name ",'ctcl-phone-pa
 echo "<div class='ctcl-phone-pay-row'><span>".__("Phone Number ",'ctcl-phone-pay')." : </span><span>{$detail['checkout-phone-number']}</span></div>";
 echo "<div class='ctcl-phone-pay-row'><span>".__("Amount to be charged ",'ctcl-phone-pay')." : </span><span>{$detail['sub-total']}</span></div>";
 echo "<div class='ctcl-phone-pay-row'>";
-submit_button( __( 'Mark Paid', 'ctc-lite' ), 'primary ctcl-pay-phone-mark-paid','submit',false);
+submit_button( __( 'Mark Paid', 'ctcl-phone-pay' ), 'primary ctcl-pay-phone-mark-paid','submit',false);
 echo "</div>";
 echo '</fieldset>';
 
 wp_die();
       }
 
+      /**
+       * Generate emailbody with phone info
+       * 
+       * @param $val email body to be modified
+       * @param $data Order data array 
+       */
+      public function generateEmailBody($val,$data){
+
+
+        if('ctcl_phone_pay' == $data['payment_option']):
+
+        $body = '<div style="margin-left:auto;margin-right:auto;display:block;padding:20px;">';
+        $body .= '<p>'.__('Hello','ctcl-phone-pay').', '.$data['ctcl-co-first-name'].'</p>';
+        $body .= '<p>'.__('Thank you for your purchase, your purchase details are as follows :','ctcl-phone-pay').'</p>';
+        $body .= '<p>'.__('Order id ').' :'.$data['order_id'].'</p>';
+        $body .= '<p>'.__('Your order details :','ctcl-phone-pay').'</p>';
+        $body .= '<div style="width:600px;">';
+        $body .= '<div style="padding-top:10px;border-bottom:1px solid rgba(255,255,255,1);display:table;height:30px;background-color:rgba(0,0,0,0.1);width:600px;text-align:center;">';
+        $body .= '<span style="display:table-cell;height:30px;width:200px;" >'.__('Products','ctcl-phone-pay').'</span>';
+        $body .= '<span style="display:table-cell;height:30px;width:300px;" >'.__('Variation','ctcl-phone-pay').'</span>';
+        $body .='<span style="display:table-cell;height:30px;width:50px;" >'.__('Qty').'</span>';
+        $body .='<span style="display:table-cell;height:30px;width:100px;" >'.__('Item Total').'</span></div>';
+        foreach($data['products'] as $key=>$value):
+            $product = json_decode(stripslashes($value),TRUE);
+            $body .= "<div style='border-bottom:1px solid rgba(255,255,255,1);display:table;height:30px;background-color:rgba(0,0,0,0.1);width:600px;text-align:center;padding-top:10px;'>";
+            $body .="<span  style='display:table-cell;width:200px'>{$product['itemName']}</span>";
+            $body .="<span  style='display:table-cell;width:300px'>{$product['vari']}</span>";
+            $body.="<span style='display:table-cell;width:50px;'>{$product['quantity']}</span>";
+            $body .="<span style='display:table-cell;width:100px;' >{$product['itemTotal']}</span></div>";
+        endforeach;
+        $body .='<div style="padding-top:10px;border-bottom:1px solid rgba(255,255,255,1);height:30px;display:table;background-color:rgba(0,0,0,0.1);width:600px;text-align:center;">';
+        $body .='<span style="display:table-cell;width:500px;text-align:right;" >'.__('Tax Rate ','ctcl-phone-pay').' : </span>';
+        $body.='<span style="display:table-cell;">'.get_option('ctcl_tax_rate').' % </span></div>';
+        $body .='<div style="padding-top:10px;border-bottom:1px solid rgba(255,255,255,1);height:30px;display:table;background-color:rgba(0,0,0,0.1);width:600px;text-align:center;">';
+        $body .='<span style="display:table-cell;width:500px;text-align:right;">'.__('Shipping Cost ','ctcl-phone-pay').' ('.get_option('ctcl_currency').') : </span>';
+        $body .= '<span style="display:table-cell;" >'.$data['shipping-total'].'</span></div>';
+        $body .='<div style="padding-top:10px;border-bottom:1px solid rgba(255,255,255,1);height:30px;display:table;background-color:rgba(0,0,0,0.1);width:600px;text-align:center;">';
+        $body.='<span style="display:table-cell;width:500px;text-align:right;" >'.__('Sub Total ','ctcl-phone-pay').' ('.get_option('ctcl_currency').') : </span>';
+        $body.='<span style="display:table-cell;" >'.$data['sub-total'].'</span></div>';
+        $body .='</div>';
+        $body .= "<div style='font-size:15px;margin-top:15px'; ><p>".__('Please provide payment infomation only to call from number : ','ctcl-phone-pay')." ".get_option('ctcl_phone_pay_phone_number')."</p></div>";
+        $body .= "<div style='font-size:15px;margin-top:15px';'><p>".__('Shipping Note :','ctcl-phone-pay')."</p>{$data['shipping_note']}</div>";
+        $body .='</div>';
+        return $body;
+        else :
+            return '';
+        endif;
+      }
       /**
        * Mark phone pay paid
        */
@@ -117,8 +166,7 @@ wp_die();
       */
 
      public function addAdminTab($val){
-
-     
+         
             return  array_merge($val,array('pay_by_phone'=>array(
                 'id'=>$this->paymentId,
                 'icon'=>'phone',
@@ -317,7 +365,7 @@ public function requiredWpAction(){
     add_action( 'admin_notices', function(){
         echo '<div class="notice notice-error is-dismissible"><p>';
          _e( 'CTCL Phone pay plugin requires CTC Lite plugin installed and activated to work, please do so first.', 'ctcl-phone-pay' );
-         echo '<a href="'.admin_url('plugin-install.php').'?tab=plugin-information&plugin=ctc-lite&TB_iframe=true&width=640&height=500" class="thickbox">'.__('Click Here to install it','ctcl-phone-pay').' </a>'; 
+         echo '<a href="'.admin_url('plugin-install.php').'?tab=plugin-information&plugin=ctcl-phone-pay&TB_iframe=true&width=640&height=500" class="thickbox">'.__('Click Here to install it','ctcl-phone-pay').' </a>'; 
         echo '</p></div>';
     } );
 }
