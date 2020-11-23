@@ -42,9 +42,20 @@ if(class_exists('ctclBillings')){
         self::requiredWpAction();
         self::callRequiredFilters();
         self::addRequiredAjax();
+        register_deactivation_hook(__FILE__,  array($this,'phonePayDeactivate'));
       
     }
 
+    /**
+     * Run on deactivation
+     * 
+     */
+
+     public function phonePayDeactivate(){
+
+          delete_option('ctcl_activate_phone_pay');
+          delete_option('ctcl_phone_pay_phone_number');
+     }
     /**
      * All required filters
      */
