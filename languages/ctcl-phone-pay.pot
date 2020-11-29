@@ -1,0 +1,172 @@
+# Copyright (C) 2020 Ujwol Bastakoti
+# This file is distributed under the same license as the CTCL Phone Pay plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: CTCL Phone Pay 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ctcl-phone-pay\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-11-29T01:41:34+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: ctcl-phone-pay\n"
+
+#. Plugin Name of the plugin
+msgid "CTCL Phone Pay"
+msgstr ""
+
+#. Description of the plugin
+msgid "CT commerce lite phone pay payment addon"
+msgstr ""
+
+#. Author of the plugin
+msgid "Ujwol Bastakoti"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://ujw0l.github.io/"
+msgstr ""
+
+#: ctcl-phone-pay.php:38
+msgid "Pay by phone"
+msgstr ""
+
+#: ctcl-phone-pay.php:92
+msgid "Phone pay detail for"
+msgstr ""
+
+#: ctcl-phone-pay.php:93
+msgid "Customer Name "
+msgstr ""
+
+#: ctcl-phone-pay.php:94
+msgid "Phone Number "
+msgstr ""
+
+#: ctcl-phone-pay.php:95
+msgid "Amount to be charged "
+msgstr ""
+
+#: ctcl-phone-pay.php:98
+msgid "Open Order Detail"
+msgstr ""
+
+#: ctcl-phone-pay.php:100
+msgid "Mark Paid"
+msgstr ""
+
+#: ctcl-phone-pay.php:119
+msgid "Hello"
+msgstr ""
+
+#: ctcl-phone-pay.php:120
+msgid "Thank you for your purchase, your purchase details are as follows :"
+msgstr ""
+
+#: ctcl-phone-pay.php:122
+msgid "Your order details :"
+msgstr ""
+
+#: ctcl-phone-pay.php:125
+msgid "Products"
+msgstr ""
+
+#: ctcl-phone-pay.php:126
+msgid "Variation"
+msgstr ""
+
+#: ctcl-phone-pay.php:138
+msgid "Tax Rate "
+msgstr ""
+
+#: ctcl-phone-pay.php:141
+msgid "Shipping Cost "
+msgstr ""
+
+#: ctcl-phone-pay.php:144
+msgid "Sub Total "
+msgstr ""
+
+#: ctcl-phone-pay.php:147
+msgid "Please provide payment infomation only to call from number : "
+msgstr ""
+
+#: ctcl-phone-pay.php:148
+msgid "Shipping Note :"
+msgstr ""
+
+#: ctcl-phone-pay.php:187
+#: ctcl-phone-pay.php:340
+msgid "Phone Pay"
+msgstr ""
+
+#: ctcl-phone-pay.php:205
+msgid "Pending Payments"
+msgstr ""
+
+#: ctcl-phone-pay.php:217
+msgid "Click Here"
+msgstr ""
+
+#: ctcl-phone-pay.php:229
+msgid "Order Id"
+msgstr ""
+
+#: ctcl-phone-pay.php:230
+msgid "Order Date"
+msgstr ""
+
+#: ctcl-phone-pay.php:231
+msgid "Phone Number"
+msgstr ""
+
+#: ctcl-phone-pay.php:232
+msgid "Total"
+msgstr ""
+
+#: ctcl-phone-pay.php:233
+msgid "Open Detail"
+msgstr ""
+
+#: ctcl-phone-pay.php:240
+msgid "There are no any pending phone payment right now."
+msgstr ""
+
+#: ctcl-phone-pay.php:243
+msgid "There are no any pending phone payment right now"
+msgstr ""
+
+#: ctcl-phone-pay.php:287
+msgid "Marked paid sucessfully."
+msgstr ""
+
+#: ctcl-phone-pay.php:288
+msgid "Could not be mark paid at this time"
+msgstr ""
+
+#: ctcl-phone-pay.php:332
+msgid "Activate Phone Pay :"
+msgstr ""
+
+#: ctcl-phone-pay.php:335
+msgid "Phone Number:"
+msgstr ""
+
+#: ctcl-phone-pay.php:336
+msgid "Number you will call from to collect billing info."
+msgstr ""
+
+#: ctcl-phone-pay.php:368
+msgid "Please provide payment info to call from :"
+msgstr ""
+
+#: ctcl-phone-pay.php:381
+msgid "CTCL Phone pay plugin requires CTC Lite plugin installed and activated to work, please do so first."
+msgstr ""
+
+#: ctcl-phone-pay.php:382
+msgid "Click Here to install it"
+msgstr ""
