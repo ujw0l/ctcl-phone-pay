@@ -2,7 +2,7 @@
 Contributors: UjW0L
 Tags: phone-pay, pay-by-phone, ctc-lite
 Requires at least: 5.5.2
-Tested up to: 5.5.2
+Tested up to: 5.7.2
 Requires PHP: 7.4.9
 Stable tag: 1.0.0
 License: GPLv2 or later
