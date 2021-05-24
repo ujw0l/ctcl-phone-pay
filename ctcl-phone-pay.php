@@ -379,7 +379,7 @@ public function requiredWpAction(){
     add_action( 'admin_notices', function(){
         echo '<div class="notice notice-error is-dismissible"><p>';
          _e( 'CTCL Phone pay plugin requires CTC Lite plugin installed and activated to work, please do so first.', 'ctcl-phone-pay' );
-         echo '<a href="'.admin_url('plugin-install.php').'?tab=plugin-information&plugin=ctcl-phone-pay&TB_iframe=true&width=640&height=500" class="thickbox">'.__('Click Here to install it','ctcl-phone-pay').' </a>'; 
+         echo '<a href="'.admin_url('plugin-install.php').'?tab=plugin-information&plugin=ctcl-lite&TB_iframe=true&width=640&height=500" class="thickbox">'.__('Click Here to install it','ctcl-phone-pay').' </a>'; 
         echo '</p></div>';
     } );
 }
