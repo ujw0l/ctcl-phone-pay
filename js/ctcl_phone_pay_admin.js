@@ -86,7 +86,7 @@ class phonePayJs {
 
                 if (event.target.status >= 200 && event.target.status < 400) {
                     document.querySelector('.js-overlay-close-1').click();
-                    new jsOverlay({ elContent: event.target.response, containerHt: 600, containerWd: 1080, overlayNum: 2 });
+                    new jsOverlay({ elContent: event.target.response, containerHt: 600,  containerWd: 1200, overlayNum: 2 });
                     new jsMasonry('.ctcl-pending-order-detail', { elWidth: 500, heightSort: 'desc', elMargin: 10 });
                     this.addPendingOrderModalEvent();
                 } else {

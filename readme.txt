@@ -1,10 +1,11 @@
 === CTCL Phone Pay===
 Contributors: UjW0L
-Tags: phone-pay, pay-by-phone, ctc-lite
+Tags: phone-pay, pay-by-phone, ctc-lite,ecommerce
+Donate link: https://www.patreon.com/ujw0l/membership
 Requires at least: 5.5.2
-Tested up to: 5.7.2
+Tested up to: 6.2.2
 Requires PHP: 7.4.9
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 
 CTC Lite add-on to charge customer with phone call
@@ -36,3 +37,6 @@ e.g.
 
 =1.0.0=
 *First Stable version
+
+=1.1.0=
+*Bug fixes
