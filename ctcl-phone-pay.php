@@ -3,7 +3,7 @@
  Plugin Name:CTCL Phone Pay
  Plugin URIhttps://github.com/ujw0l/ ctcl-phone-pay/blob/main/ ctcl-phone-pay.php
  Description: CT commerce lite phone pay payment addon
- Version: 1.0.0
+ Version: 1.1.0
  Author: Ujwol Bastakoti
  Author URI:https://ujw0l.github.io/
  Text Domain:  ctcl-phone-pay
